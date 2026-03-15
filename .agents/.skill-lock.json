@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "skills": {
+        "semver": {
+            "source": "kayaman/skills",
+            "sourceType": "github",
+            "sourceUrl": "https://github.com/kayaman/skills.git",
+            "skillPath": "skills/semver/SKILL.md",
+            "skillFolderHash": "14041f9581508449bccbe07cdf557b59784601cb5aeec69f8258df4ba6476d28",
+            "installedAt": "2026-03-15T15:35:10.207Z",
+            "updatedAt": "2026-03-15T15:35:56.896Z"
+        }
+    }
+}

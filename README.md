@@ -13,6 +13,10 @@ Agent skills package manager — install, manage, and discover AI agent skills f
 cargo install agentskills
 ```
 
+## Skills
+
+For a curated collection of ready-to-use skills, see [kayaman/skills](https://github.com/kayaman/skills).
+
 ## Commands
 
 ### `agentskills add <source>`

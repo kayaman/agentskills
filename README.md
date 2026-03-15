@@ -98,6 +98,8 @@ description: What this skill does and when to use it.
 Instructions for the AI agent...
 ```
 
+For a curated collection of ready-to-use skills, see [kayaman/skills](https://github.com/kayaman/skills).
+
 Skills are typically organized in a GitHub repo under a `skills/` directory:
 
 ```

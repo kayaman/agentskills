@@ -102,8 +102,9 @@ description: What this skill does and when to use it.
 Instructions for the AI agent...
 ```
 
-Skills are typically organized in a GitHub repo under a `skills/` directory:
+Skills can be organized in a GitHub repo in either layout:
 
+**Option A — under `skills/` subdirectory:**
 ```
 my-repo/
 └── skills/
@@ -114,6 +115,19 @@ my-repo/
         └── references/
             └── extra-context.md
 ```
+
+**Option B — at repo root:**
+```
+my-repo/
+├── skill-a/
+│   └── SKILL.md
+└── skill-b/
+    ├── SKILL.md
+    └── references/
+        └── extra-context.md
+```
+
+Both layouts are supported. The installer searches `skills/` first, then the repo root.
 
 ## Lockfile
 

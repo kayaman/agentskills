@@ -19,25 +19,29 @@ For a curated collection of ready-to-use skills, see [kayaman/skills](https://gi
 
 ## Commands
 
-### `agentskills add <source>`
+### `agentskills install <source>` (alias: `add`)
 
-Install a skill from GitHub or a local path.
+Install a skill by name, from GitHub, or from a local path. A bare name installs
+that single skill from [kayaman/agentskills](https://github.com/kayaman/agentskills).
 
 ```bash
+# Install one skill by name
+agentskills install 3d-printing
+
 # Install a specific skill from a repo
-agentskills add kayaman/skills@semver
+agentskills install kayaman/skills@semver
 
 # Install all skills from a repo
-agentskills add kayaman/skills
+agentskills install kayaman/skills
 
 # Install globally (to ~/.agents/skills/)
-agentskills add kayaman/skills@semver --global
+agentskills install kayaman/skills@semver --global
 
 # Install from a local directory
-agentskills add ./my-local-skill
+agentskills install ./my-local-skill
 
 # Skip confirmation
-agentskills add kayaman/skills@semver --yes
+agentskills install kayaman/skills@semver --yes
 ```
 
 ### `agentskills list`

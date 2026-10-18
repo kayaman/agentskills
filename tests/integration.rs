@@ -26,7 +26,7 @@ fn install_from_local_repo_with_root_level_skills() {
     let cwd = TempDir::new().unwrap();
     let mut cmd = Command::cargo_bin("agentskills").unwrap();
     cmd.current_dir(cwd.path())
-        .arg("add")
+        .arg("install")
         .arg(repo.path().display().to_string())
         .arg("--yes");
 

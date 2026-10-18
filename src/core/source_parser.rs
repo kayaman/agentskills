@@ -5,6 +5,10 @@ use regex::Regex;
 
 use crate::models::{SkillSource, SourceType};
 
+/// Repo used when a bare skill name (e.g. `3d-printing`) is given.
+pub const DEFAULT_OWNER: &str = "kayaman";
+pub const DEFAULT_REPO: &str = "agentskills";
+
 pub fn parse_source(raw: &str) -> Result<SkillSource> {
     let raw = raw.trim();
 
@@ -25,7 +29,13 @@ pub fn parse_source(raw: &str) -> Result<SkillSource> {
         });
     }
 
-    let mut input = raw.to_string();
+    // Bare skill name: install that single skill from the default repo.
+    let bare = Regex::new(r"^[A-Za-z0-9._-]+(?:#.+)?$")?;
+    let mut input = if bare.is_match(raw) {
+        format!("{DEFAULT_OWNER}/{DEFAULT_REPO}@{raw}")
+    } else {
+        raw.to_string()
+    };
     let mut git_ref = "main".to_string();
 
     if let Some(pos) = input.rfind('#') {
@@ -115,12 +125,29 @@ mod tests {
 
     #[test]
     fn test_invalid_format() {
-        let result = parse_source("not-a-valid-source");
+        let result = parse_source("not/a/valid-source");
         assert!(result.is_err());
         assert!(result
             .unwrap_err()
             .to_string()
             .contains("Invalid source format"));
+    }
+
+    #[test]
+    fn test_bare_name_uses_default_repo() {
+        let result = parse_source("3d-printing").unwrap();
+        assert_eq!(result.owner, DEFAULT_OWNER);
+        assert_eq!(result.repo, DEFAULT_REPO);
+        assert_eq!(result.skill, "3d-printing");
+        assert_eq!(result.git_ref, "main");
+        assert!(matches!(result.source_type, SourceType::Github));
+    }
+
+    #[test]
+    fn test_bare_name_with_ref() {
+        let result = parse_source("3d-printing#v2").unwrap();
+        assert_eq!(result.skill, "3d-printing");
+        assert_eq!(result.git_ref, "v2");
     }
 
     #[test]

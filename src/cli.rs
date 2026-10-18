@@ -20,9 +20,10 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Install a skill from GitHub or a local path
-    Add {
-        /// Skill source: owner/repo@skill, owner/repo, or local path
+    /// Install a skill by name, from GitHub, or from a local path
+    #[command(visible_alias = "add")]
+    Install {
+        /// Skill name (from kayaman/agentskills), owner/repo@skill, owner/repo (all skills), or local path
         source: String,
         /// Install to ~/.agents/skills/
         #[arg(short, long = "global")]
@@ -94,7 +95,7 @@ enum Commands {
 pub fn run() {
     let cli = Cli::parse();
     let result = match cli.command {
-        Commands::Add {
+        Commands::Install {
             source,
             global,
             yes,
